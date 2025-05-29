@@ -15,7 +15,8 @@ async def create_subagents():
         configurable={
             "model": supervisor_config.finance_model,
             "system_prompt": supervisor_config.finance_system_prompt,
-            "selected_tools": supervisor_config.finance_tools
+            "selected_tools": supervisor_config.finance_tools,
+            "name": "finance_research_agent"
         }
     )
     finance_research_agent = await make_graph(finance_config)
@@ -25,7 +26,8 @@ async def create_subagents():
         configurable={
             "model": supervisor_config.research_model,
             "system_prompt": supervisor_config.research_system_prompt,
-            "selected_tools": supervisor_config.research_tools
+            "selected_tools": supervisor_config.research_tools,
+            "name": "general_research_agent"
         }
     )
     general_research_agent = await make_graph(research_config)
@@ -35,7 +37,8 @@ async def create_subagents():
         configurable={
             "model": supervisor_config.writing_model,
             "system_prompt": supervisor_config.writing_system_prompt,
-            "selected_tools": supervisor_config.writing_tools
+            "selected_tools": supervisor_config.writing_tools,
+            "name": "writing_agent"
         }
     )
     writing_agent = await make_graph(writing_config)
