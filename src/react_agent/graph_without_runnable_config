@@ -1,0 +1,34 @@
+"""Define a custom Reasoning and Action agent.
+
+Works with a chat model with tool calling support.
+"""
+from react_agent.tools import get_tools
+from langchain.chat_models import init_chat_model
+from langgraph.prebuilt import create_react_agent
+
+from langchain_core.runnables import RunnableConfig
+
+
+
+async def make_graph(config: RunnableConfig):
+    # Extract configuration values directly
+    configurable = config.get("configurable")
+    
+    # Get the system prompt and model from the configuration
+    system_prompt = configurable.get("system_prompt")
+    llm_model = configurable.get("model")
+    
+    # initialize our model and tools
+    llm = init_chat_model(llm_model)
+    tools = get_tools(config)
+    prompt = system_prompt
+
+    # Compile the builder into an executable graph
+    # You can customize this by adding interrupt points for state updates
+    graph = create_react_agent(
+        model = llm, 
+        tools = tools, 
+        prompt=prompt
+    )
+
+    return graph

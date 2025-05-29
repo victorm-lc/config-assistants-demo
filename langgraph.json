@@ -1,0 +1,7 @@
+{
+  "dependencies": ["."],
+  "graphs": {
+    "agent_from_prebuilt": "./src/react_agent/graph_from_prebuilt.py:make_graph"
+  },
+  "env": ".env"
+}
