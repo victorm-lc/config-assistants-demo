@@ -19,7 +19,7 @@ class Configuration(BaseModel):
 
     model: Annotated[
             Literal[
-                "anthropic/claude-3-7-sonnet-latest",
+                "anthropic/claude-4-sonnet-latest",
                 "anthropic/claude-3-5-sonnet-latest",
                 "openai/gpt-4.1",
                 "openai/gpt-4.1-mini"
@@ -36,13 +36,3 @@ class Configuration(BaseModel):
         description="The list of tools to use for the agent's interactions. "
         "This list should contain the names of the tools to use."
     )
-
-    @classmethod
-    def from_runnable_config(
-        cls, config: Optional[RunnableConfig] = None
-    ) -> Configuration:
-        """Create a Configuration instance from a RunnableConfig object."""
-        config_dict = ensure_config(config)
-        configurable = config_dict.get("configurable") or {}
-        # Use model_fields instead of fields() in Pydantic v2
-        return cls(**{k: v for k, v in configurable.items() if k in cls.model_fields})

@@ -26,7 +26,7 @@ class Configuration(BaseModel):
     )
     supervisor_model: Annotated[
         Literal[
-            "anthropic/claude-3-7-sonnet-latest",
+            "anthropic/claude-4-sonnet-latest",
             "anthropic/claude-3-5-sonnet-latest",
             "openai/gpt-4.1",
             "openai/gpt-4.1-mini"
@@ -124,11 +124,3 @@ class Configuration(BaseModel):
         description="The list of tools to make available to the general research sub-agent.",
         json_schema_extra={"langgraph_nodes": ["general_research_agent"]}
     )
-
-    @classmethod
-    def from_runnable_config(
-        cls, config: Optional[RunnableConfig] = None
-    ) -> "Configuration":
-        config_dict = ensure_config(config)
-        configurable = config_dict.get("configurable") or {}
-        return cls(**{k: v for k, v in configurable.items() if k in cls.model_fields})

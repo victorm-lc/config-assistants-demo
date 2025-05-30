@@ -6,28 +6,22 @@ These tools are intended as free examples to get started. For production use,
 consider implementing more robust and specialized tools tailored to your needs.
 """
 
-from typing import Any, Callable, Dict, List, Optional, cast
+from typing import Callable, Optional, cast, Any
 
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain_community.tools.yahoo_finance_news import YahooFinanceNewsTool
-from langchain_core.runnables import RunnableConfig
-from langchain_core.tools import InjectedToolArg, tool
-from typing_extensions import Annotated
+from langchain_core.tools import tool
 from datetime import datetime
 
 @tool
-async def finance_research(
-    ticker_symbol: str, *, config: Annotated[RunnableConfig, InjectedToolArg]
-) -> Optional[list[dict[str, Any]]]:
+async def finance_research(ticker_symbol: str) -> Optional[list[dict[str, Any]]]:
     """Search for finance research, must be a ticker symbol."""
     wrapped = YahooFinanceNewsTool()
     result = await wrapped.ainvoke({"query": ticker_symbol})
     return cast(list[dict[str, Any]], result)
 
 @tool   
-async def advanced_research_tool(
-    query: str, *, config: Annotated[RunnableConfig, InjectedToolArg]
-) -> Optional[list[dict[str, Any]]]:
+async def advanced_research_tool(query: str) -> Optional[list[dict[str, Any]]]:
     """Perform in-depth research for blog content.
     
     This tool conducts comprehensive web searches with higher result limits and
@@ -43,9 +37,7 @@ async def advanced_research_tool(
     return cast(list[dict[str, Any]], result)
 
 @tool
-async def basic_research_tool(
-    query: str, *, config: Annotated[RunnableConfig, InjectedToolArg]
-) -> Optional[list[dict[str, Any]]]:
+async def basic_research_tool(query: str) -> Optional[list[dict[str, Any]]]:
     """Research trending topics for social media content.
     
     This tool performs quick searches optimized for trending and viral content,
@@ -67,11 +59,8 @@ async def get_todays_date() -> str:
     return datetime.now().strftime("%Y-%m-%d")
 
 
-def get_tools(config) -> list[Callable[..., Any]]:
-    # Extract configuration values 
-    configurable = config.get("configurable", {})
-    selected_tools = configurable.get("selected_tools", ["get_todays_date"])
-    
+def get_tools(selected_tools: list[str]) -> list[Callable[..., Any]]:
+    """Convert a list of tool names to actual tool functions."""
     tools = []
     for tool in selected_tools:
         if tool == "finance_research":
@@ -82,4 +71,5 @@ def get_tools(config) -> list[Callable[..., Any]]:
             tools.append(basic_research_tool)
         elif tool == "get_todays_date":
             tools.append(get_todays_date)
+    
     return tools

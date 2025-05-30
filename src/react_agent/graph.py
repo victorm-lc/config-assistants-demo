@@ -12,22 +12,23 @@ from langchain_core.runnables import RunnableConfig
 
 
 async def make_graph(config: RunnableConfig):
-    configuration = Configuration.from_runnable_config(config)
     
     # Get name from config or use default
     configurable = config.get("configurable", {}) if config else {}
-    name = configurable.get("name", "react_agent")
+
+    # get values from configuration
+    llm = configurable.get("model", "openai/gpt-4.1")
+    selected_tools = configurable.get("selected_tools", ["get_todays_date"])
+    prompt = configurable.get("system_prompt", "You are a helpful assistant.")
     
-    # Define a new graph
-    llm = load_chat_model(configuration.model)
-    tools = get_tools(config)
-    prompt = configuration.system_prompt
+    # specify the name for use in supervisor architecture
+    name = configurable.get("name", "react_agent")
 
     # Compile the builder into an executable graph
     # You can customize this by adding interrupt points for state updates
     graph = create_react_agent(
-        model=llm, 
-        tools=tools, 
+        model=load_chat_model(llm), 
+        tools=get_tools(selected_tools),
         prompt=prompt, 
         config_schema=Configuration,
         name=name
