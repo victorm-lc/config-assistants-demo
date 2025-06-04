@@ -1,6 +1,6 @@
-"""Define a custom Reasoning and Action agent.
+"""Define a Reasoning and Action agent using the LangGraph prebuilt react agent. 
 
-Works with a chat model with tool calling support.
+Add configuration and implement using a make_graph function to rebuild the graph at runtime.
 """
 from src.react_agent.tools import get_tools
 from langgraph.prebuilt import create_react_agent
@@ -14,7 +14,7 @@ from langchain_core.runnables import RunnableConfig
 async def make_graph(config: RunnableConfig):
     
     # Get name from config or use default
-    configurable = config.get("configurable", {}) if config else {}
+    configurable = config.get("configurable", {})
 
     # get values from configuration
     llm = configurable.get("model", "openai/gpt-4.1")
