@@ -1,10 +1,6 @@
 """Define the configurable parameters for the agent."""
 
-from __future__ import annotations
-
-from typing import Annotated, Literal, Optional
-
-from langchain_core.runnables import RunnableConfig, ensure_config
+from typing import Annotated, Literal
 from pydantic import BaseModel, Field
 
 
