@@ -112,10 +112,10 @@ class Configuration(BaseModel):
     ] = Field(
         default="openai/gpt-4.1",
         description="The name of the language model to use for the research sub-agent.",
-        json_schema_extra={"langgraph_nodes": ["general_research_agent"]}
+        json_schema_extra={"langgraph_nodes": ["writing_agent"]}
     )
     writing_tools: list[Literal["finance_research", "advanced_research", "basic_research", "get_todays_date"]] = Field(
         default = ["advanced_research", "get_todays_date"],
         description="The list of tools to make available to the general research sub-agent.",
-        json_schema_extra={"langgraph_nodes": ["general_research_agent"]}
+        json_schema_extra={"langgraph_nodes": ["writing_agent"]}
     )
