@@ -15,7 +15,7 @@ class Configuration(BaseModel):
 
     model: Annotated[
             Literal[
-                "anthropic/claude-4-sonnet-latest",
+                "anthropic/claude-sonnet-4-20250514",
                 "anthropic/claude-3-5-sonnet-latest",
                 "openai/gpt-4.1",
                 "openai/gpt-4.1-mini"

@@ -1,6 +1,6 @@
 # LangGraph Configuration Patterns Demo
 
-project demonstrates **how to implement configuration patterns** in ReAct Agents and supervisor-style architectures using [LangGraph](https://github.com/langchain-ai/langgraph). It shows the progression from hardcoded agents to flexible, configurable systems.
+This project demonstrates **how to implement configuration patterns** in ReAct Agents and supervisor-style architectures using [LangGraph](https://github.com/langchain-ai/langgraph). It shows the progression from hardcoded agents to flexible, configurable systems.
 
 
 ## Configuration Pattern Progression
@@ -17,7 +17,7 @@ This demo showcases three approaches to agent configuration:
 - Configurable models, prompts, and tools
 - Clean `config.get("configurable", {})` pattern
 
-### 3. **Multi-Agent Configuration** (`src/supervisor_prebuilt/`)
+### 3. **Multi-Agent Configuration** (`src/supervisor/`)
 - Supervisor orchestrating multiple configured agents
 - Each subagent uses the same configuration pattern
 - Shows how configuration scales to complex architectures

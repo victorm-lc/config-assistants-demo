@@ -1,10 +1,12 @@
 [project]
-name = "assistants-demo"
+name = "langgraph-configuration-patterns-demo"
 version = "0.0.1"
-description = "Example of configuration and assistants using ReAct and Supervisor agents"
+description = "Demonstrates configuration patterns in LangGraph from simple to multi-agent systems"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "dotenv>=0.9.9",
+    "ipykernel>=6.29.5",
     "jupyter>=1.1.1",
     "langchain>=0.3.25",
     "langchain-anthropic>=0.3.14",
@@ -13,9 +15,11 @@ dependencies = [
     "langchain-tavily>=0.2.0",
     "langgraph>=0.4.7",
     "langgraph-cli[inmem]>=0.2.10",
+    "langgraph-sdk>=0.1.70",
     "langgraph-supervisor>=0.0.27",
     "pydantic>=2.11.5",
     "python-dotenv>=1.1.0",
     "typing-extensions>=4.13.2",
+    "langchain-google-vertexai",
     "yfinance>=0.2.61",
 ]
