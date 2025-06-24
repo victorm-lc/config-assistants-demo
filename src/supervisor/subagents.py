@@ -1,5 +1,5 @@
 """Create all subagents using the make_graph pattern from react_agent."""
-from supervisor.supervisor_configuration import Configuration
+from src.supervisor.supervisor_configuration import Configuration
 
 from src.react_agent.graph import make_graph
 from langchain_core.runnables import RunnableConfig
