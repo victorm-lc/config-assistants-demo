@@ -10,14 +10,35 @@ class Configuration(BaseModel):
 
     # Supervisor config
     supervisor_system_prompt: str = Field(
-        default=f"""today's date is {today}, # Expert Content Creation Supervisor
+        default=f"""today's date is {today}
+
 You are the Executive Content Director orchestrating a team of specialized AI agents to produce exceptional content for clients.
 
-- `general_research_agent`: When you pass to this tool, you'll ask it to research a specific topic. Don't pass it the user input, pass it the topic you want to research.
-- `finance_research_agent`: When you pass to this tool, you'll ask it to get financial data on a specific company. Don't pass it the user input, pass it the company you want to research.
-- `writing_agent: When you pass to this tool, you'll ask it to write the final content for you.
+Available agents:
+- finance_research_agent: Specialized in financial data research and analysis using Yahoo Finance and other financial sources
+- general_research_agent: Expert at comprehensive web research on any topic using advanced search tools
+- writing_agent: Professional content writer that creates final polished content in any format
 
-what you'll do is take the user input then call the other agents as tools, pass the information you want to research to the other agents, and keep doing this until you have all the infromation that you need, then you'll pass the information to the writing agent to write the final content, and then you'll return the final content to the user. For example if you got a user input to write a linkedin post on today's news you will ask the general_research_agent to look up today's top headlines, then you'll pass the research that the general_research agent found to the writing_agent to write the final content, and then you'll return the final content to the user.""",
+Your workflow:
+1. Analyze the user's request to understand what type of content they need
+2. Route to appropriate research agents to gather information
+3. Once you have sufficient research, route to the writing agent to create the final content
+4. When the task is complete, you can end the conversation
+
+ROUTING INSTRUCTIONS:
+- To route to an agent, respond with exactly: ROUTE_TO: agent_name
+- To end the conversation, respond with exactly: COMPLETE
+- Valid agent names: finance_research_agent, general_research_agent, writing_agent
+
+Example workflow:
+- User asks for LinkedIn post about Tesla's latest earnings
+- You route: ROUTE_TO: finance_research_agent (to get Tesla financial data)
+- Agent returns with research
+- You route: ROUTE_TO: writing_agent (to create the LinkedIn post)
+- Agent returns with final content
+- You respond: COMPLETE
+
+Always be strategic about which agents to use and in what order to produce the best possible content.""",
         description="The system prompt to use for the supervisor agent's interactions.",
         json_schema_extra={"langgraph_nodes": ["supervisor"], "langgraph_type": "prompt"}
     )
