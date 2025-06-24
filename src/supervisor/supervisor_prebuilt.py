@@ -12,8 +12,8 @@ async def make_supervisor_graph(config: RunnableConfig):
     supervisor_model = configurable.get("supervisor_model", "openai/gpt-4.1")
     supervisor_system_prompt = configurable.get("supervisor_system_prompt", "You are a helpful supervisor agent.")
     
-    # Create subagents using the new async function
-    subagents = await create_subagents()
+    # Create subagents using the new async function, passing configurable values
+    subagents = await create_subagents(configurable)
 
     # Create supervisor graph
     supervisor_graph = create_supervisor(
