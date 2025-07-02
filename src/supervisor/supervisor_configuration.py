@@ -25,11 +25,6 @@ Your workflow:
 3. Once you have sufficient research, route to the writing agent to create the final content
 4. When the task is complete, you can end the conversation
 
-ROUTING INSTRUCTIONS:
-- To route to an agent, respond with exactly: ROUTE_TO: agent_name
-- To end the conversation, respond with exactly: COMPLETE
-- Valid agent names: finance_research_agent, general_research_agent, writing_agent
-
 Example workflow:
 - User asks for LinkedIn post about Tesla's latest earnings
 - You route: ROUTE_TO: finance_research_agent (to get Tesla financial data)
@@ -81,8 +76,8 @@ When you are done with your research, return the research to the supervisor agen
         description="The name of the language model to use for the finance sub-agent.",
         json_schema_extra={"langgraph_nodes": ["finance_research_agent"]}
     )
-    finance_tools: list[Literal["finance_research", "advanced_research", "basic_research", "get_todays_date"]] = Field(
-        default = ["finance_research", "basic_research", "get_todays_date"],
+    finance_tools: list[Literal["finance_research", "advanced_research_tool", "basic_research_tool", "get_todays_date"]] = Field(
+        default = ["finance_research", "basic_research_tool", "get_todays_date"],
         description="The list of tools to make available to the finance sub-agent.",
         json_schema_extra={"langgraph_nodes": ["finance_research_agent"]}
     )
@@ -90,9 +85,9 @@ When you are done with your research, return the research to the supervisor agen
     # Research sub-agent config
     research_system_prompt: str = Field(
         default=f"""today's date is {today}, You are an expert general research agent. You have access to the following tools: 
-advanced_research and get_todays_date. First get today's date then continue to use the advanced_research tool to search 
+advanced_research_tool and get_todays_date. First get today's date then continue to use the advanced_research_tool tool to search 
 for general information on the topic you are given to research, when your done you return the research to the supervisor 
-agent. YOU MUST USE THE ADVANCED_RESEARCH TOOL TO GET THE INFORMATION YOU NEED""",
+agent. YOU MUST USE THE ADVANCED_RESEARCH_TOOL TO GET THE INFORMATION YOU NEED""",
         description="The system prompt for the research sub-agent.",
         json_schema_extra={"langgraph_nodes": ["general_research_agent"]}
     )
@@ -109,8 +104,8 @@ agent. YOU MUST USE THE ADVANCED_RESEARCH TOOL TO GET THE INFORMATION YOU NEED""
         description="The name of the language model to use for the research sub-agent.",
         json_schema_extra={"langgraph_nodes": ["general_research_agent"]}
     )
-    research_tools: list[Literal["finance_research", "advanced_research", "basic_research", "get_todays_date"]] = Field(
-        default = ["advanced_research", "get_todays_date"],
+    research_tools: list[Literal["finance_research", "advanced_research_tool", "basic_research_tool", "get_todays_date"]] = Field(
+        default = ["advanced_research_tool", "get_todays_date"],
         description="The list of tools to make available to the general research sub-agent.",
         json_schema_extra={"langgraph_nodes": ["general_research_agent"]}
     )
@@ -137,8 +132,8 @@ final content based on the requested format for the user, then return the final 
         description="The name of the language model to use for the research sub-agent.",
         json_schema_extra={"langgraph_nodes": ["writing_agent"]}
     )
-    writing_tools: list[Literal["finance_research", "advanced_research", "basic_research", "get_todays_date"]] = Field(
-        default = ["advanced_research", "get_todays_date"],
+    writing_tools: list[Literal["finance_research", "advanced_research_tool", "basic_research_tool", "get_todays_date"]] = Field(
+        default = ["advanced_research_tool", "get_todays_date"],
         description="The list of tools to make available to the general research sub-agent.",
         json_schema_extra={"langgraph_nodes": ["writing_agent"]}
     )
