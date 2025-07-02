@@ -96,13 +96,12 @@ Assuming you have already [installed LangGraph Studio](https://github.com/langch
 
 1. **Install dependencies**:
    ```bash
-   # Using uv (recommended) - this will create a virtual environment and install all dependencies
-   uv sync
-   
-   # Or using pip in a virtual environment
-   python -m venv .venv
+   # Create and activate a virtual environment
+   python3 -m venv .venv
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   pip install -e .
+   
+   # Install dependencies
+   pip install -r requirements.txt
    ```
 
 2. **Create a `.env` file**:
