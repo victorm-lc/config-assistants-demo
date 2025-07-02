@@ -65,9 +65,9 @@ def get_tools(selected_tools: list[str]) -> list[Callable[..., Any]]:
     for tool in selected_tools:
         if tool == "finance_research":
             tools.append(finance_research)
-        elif tool == "advanced_research":
+        elif tool == "advanced_research_tool":
             tools.append(advanced_research_tool)
-        elif tool == "basic_research":
+        elif tool == "basic_research_tool":
             tools.append(basic_research_tool)
         elif tool == "get_todays_date":
             tools.append(get_todays_date)
