@@ -7,17 +7,17 @@ This project demonstrates **how to implement configuration patterns** in ReAct A
 
 This demo showcases three approaches to agent configuration:
 
-### 1. **No Configuration** (`src/react_agent/graph_without_config.py`)
+### 1. **No Configuration** (`agents/react_agent/graph_without_config.py`)
 - Hardcoded ReAct agent
 - Fixed model, prompt, and tools
 - Simple but inflexible
 
-### 2. **Single Agent Configuration** (`src/react_agent/graph.py`)
+### 2. **Single Agent Configuration** (`agents/react_agent/graph.py`)
 - Dynamic configuration via `RunnableConfig`
 - Configurable models, prompts, and tools
 - Clean `config.get("configurable", {})` pattern
 
-### 3. **Multi-Agent Configuration** (`src/supervisor/`)
+### 3. **Multi-Agent Configuration** (`agents/supervisor/`)
 - Supervisor orchestrating multiple configured agents
 - Each subagent uses the same configuration pattern
 - Shows how configuration scales to complex architectures
@@ -157,13 +157,13 @@ End setup instructions
 ## Exploring the Configuration Patterns
 
 ### Start with No Configuration
-Examine `src/react_agent/graph_without_config.py` to see the hardcoded baseline.
+Examine `agents/react_agent/graph_without_config.py` to see the hardcoded baseline.
 
 ### Add Single Agent Configuration  
-Look at `src/react_agent/graph.py` to see how configuration is added while keeping the code simple.
+Look at `agents/react_agent/graph.py` to see how configuration is added while keeping the code simple.
 
 ### Scale to Multi-Agent Configuration
-Explore `src/supervisor/` to see how the same configuration patterns work with multiple specialized agents.
+Explore `agents/supervisor/` to see how the same configuration patterns work with multiple specialized agents.
 
 ## Development
 

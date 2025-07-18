@@ -2,11 +2,11 @@
 
 Add configuration and implement using a make_graph function to rebuild the graph at runtime.
 """
-from src.react_agent.tools import get_tools
+from agents.react_agent.tools import get_tools
 from langgraph.prebuilt import create_react_agent
-from src.utils import load_chat_model
+from agents.utils import load_chat_model
 
-from src.react_agent.configuration import Configuration
+from agents.react_agent.configuration import Configuration
 from langchain_core.runnables import RunnableConfig
 
 
