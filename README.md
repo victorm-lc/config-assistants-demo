@@ -96,12 +96,9 @@ Assuming you have already [installed LangGraph Studio](https://github.com/langch
 
 1. **Install dependencies**:
    ```bash
-   # Create and activate a virtual environment
-   python3 -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   
-   # Install dependencies
-   pip install -r requirements.txt
+   # Create and activate a virtual environment and install dependencies.
+   uv sync
+   source .venv/bin/activate
    ```
 
 2. **Create a `.env` file**:
@@ -110,6 +107,10 @@ Assuming you have already [installed LangGraph Studio](https://github.com/langch
    ```
 
 3. **Define required API keys** in your `.env` file.
+4. **Run LangGraph Studio Locally**
+   ```bash
+   langgraph dev
+   ```
 
 The primary search tool uses [Tavily](https://tavily.com/). Create an API key [here](https://app.tavily.com/sign-in).
 
