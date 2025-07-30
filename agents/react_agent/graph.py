@@ -30,7 +30,8 @@ async def make_graph(config: RunnableConfig):
         model=load_chat_model(llm), 
         tools=get_tools(selected_tools),
         prompt=prompt, 
-        config_schema=Configuration,
+        # Use the new context schema parameter since config schema is currently not supported in studio.
+        context_schema=Configuration,
         name=name
     )
 
