@@ -19,6 +19,7 @@ dependencies = [
     "langchain-openai>=0.3.28",
     "langchain-tavily>=0.2.11",
     "langgraph>=0.6.1",
+    "langgraph-prebuilt>=0.6.2",
     "langgraph-cli[inmem]>=0.3.6",
     "langgraph-sdk>=0.2.0",
     "langgraph-supervisor>=0.0.29",
