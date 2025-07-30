@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "assistants-demo"
 version = "0.1.0"
@@ -23,3 +27,7 @@ dependencies = [
     "typing-extensions>=4.14.1",
     "yfinance>=0.2.65",
 ]
+
+[tool.setuptools.packages.find]
+include = ["agents*"]
+exclude = ["notebooks*"]
